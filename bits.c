@@ -192,8 +192,10 @@ int bitParity(int x) {
  *   Rating: 1
  */
 int bitXor(int x, int y) {
-  return 2;
+  /* Using the identity logic: x ^ y = ~(x & y) & ~(~x & ~y) */
+  return ~(x & y) & ~(~x & ~y);
 }
+
 /* 
  * leastBitPos - return a mask that marks the position of the
  *               least significant 1 bit. If x == 0, return 0
@@ -224,7 +226,8 @@ int replaceByte(int x, int n, int c) {
  *   Rating: 1
  */
 int tmax(void) {
-  return 2;
+  /* Here I am Shifting 1 to the most significant bit and flip all bits */
+  return ~(1 << 31);
 }
 /* 
  * fitsBits - return 1 if x can be represented as an 
@@ -257,7 +260,10 @@ int divpwr2(int x, int n) {
  *   Rating: 2
  */
 int isEqual(int x, int y) {
-  return 2;
+// here the logic is (x XOR y) will be 0 if both are equal.
+// then by using ! operator.I changed the 0 to 1 to return 1
+  return !(x ^ y);
+  
 }
 /* 
  * isPositive - return 1 if x > 0, return 0 otherwise 
