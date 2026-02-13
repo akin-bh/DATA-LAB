@@ -172,8 +172,12 @@ NOTES:
  *   Rating: 2
  */
 int allEvenBits(int x) {
-  return 2;
+  int mask = 0x55;
+  mask = mask | (mask<< 8);
+  mask= mask | (mask<< 16);
+  return !((x&mask)^ mask);
 }
+
 /*
  * bitParity - returns 1 if x contains an odd number of 0's
  *   Examples: bitParity(5) = 0, bitParity(7) = 1
@@ -250,7 +254,11 @@ int fitsBits(int x, int n) {
  *   Rating: 2
  */
 int divpwr2(int x, int n) {
-    return 2;
+int mask = (1<<n)+ ~0;
+int bias = (x>>31)& mask;
+
+
+    return (x+bias)>>n;
 }
 /* 
  * isEqual - return 1 if x == y, and 0 otherwise 
@@ -273,7 +281,9 @@ int isEqual(int x, int y) {
  *   Rating: 3
  */
 int isPositive(int x) {
-  return 2;
+
+
+  return -x>>31;
 }
 /* 
  * subOK - Determine if can compute x-y without overflow
